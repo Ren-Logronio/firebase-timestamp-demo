@@ -1,15 +1,21 @@
-import { Text, View } from "react-native";
+import { ActivityIndicator, Text, View } from "react-native";
+import { styles } from "./styles";
+import { Suspense } from "react";
+import SuspenseActivityIndicator from "@/components/SuspenseActivityIndicator";
+import FirebaseFunctionDemo from "@/components/FirebaseFunctionDemo";
+import FirebaseFirestoreDemo from "@/components/FirebaseFirestoreDemo";
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+    <View style={styles.container}>
+      <View style={styles.division}>
+        <Text>Firebase Function</Text>
+        <FirebaseFunctionDemo />
+      </View>
+      <View style={styles.division}>
+        <Text>Firebase Firestore</Text>
+        <FirebaseFirestoreDemo />
+      </View>
     </View>
   );
 }
