@@ -82,3 +82,6 @@ web-build/
 
 # macOS
 .DS_Store
+
+# environment
+.env.local
