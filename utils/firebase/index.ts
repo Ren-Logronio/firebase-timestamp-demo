@@ -1,7 +1,14 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getFunctions, httpsCallable } from "firebase/functions";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  getReactNativePersistence,
+  setPersistence,
+} from "firebase/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const firebaseConfig = {
   apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
@@ -14,7 +21,12 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const firestore = getFirestore(app);
 
 export const googleAuthProvider = new GoogleAuthProvider();
 export const auth = getAuth(app);
+setPersistence(auth, getReactNativePersistence(AsyncStorage));
+
+export const functions = getFunctions(app);
+export const getTimestamp = httpsCallable(functions, "timestamp");
+
+export const firestore = getFirestore(app);
