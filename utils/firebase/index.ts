@@ -7,6 +7,7 @@ import {
   GoogleAuthProvider,
   getReactNativePersistence,
   setPersistence,
+  initializeAuth,
 } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -22,11 +23,13 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-export const googleAuthProvider = new GoogleAuthProvider();
-export const auth = getAuth(app);
-setPersistence(auth, getReactNativePersistence(AsyncStorage));
+const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(AsyncStorage),
+});
+// const functions = getFunctions(app);
+// //* might work only with onCall functions
+// const getTimestamp = httpsCallable(functions, "timestamp");
 
-export const functions = getFunctions(app);
-export const getTimestamp = httpsCallable(functions, "timestamp");
+const firestore = getFirestore(app);
 
-export const firestore = getFirestore(app);
+export { auth, firestore };
