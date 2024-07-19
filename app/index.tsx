@@ -1,4 +1,4 @@
-import { ActivityIndicator, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { styles } from "./styles";
 import { Suspense } from "react";
 import SuspenseActivityIndicator from "@/components/SuspenseActivityIndicator";
@@ -9,23 +9,17 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <View style={styles.division}>
-        <Text>Firebase Function</Text>
-        <FirebaseFunctionDemo />
+        <Text style={styles.heading}>Firebase Function</Text>
+        <Suspense fallback={<SuspenseActivityIndicator />}>
+          <FirebaseFunctionDemo />
+        </Suspense>
       </View>
       <View style={styles.division}>
-        <Text>Firebase Firestore</Text>
-        <FirebaseFirestoreDemo />
+        <Text style={styles.heading}>Firebase Firestore</Text>
+        <Suspense fallback={<SuspenseActivityIndicator />}>
+          <FirebaseFirestoreDemo />
+        </Suspense>
       </View>
     </View>
   );
 }
-
-/**
- *
- * fb function
- * server time:
- * previously stored time:
- * relative time:
- * sync
- *
- */
