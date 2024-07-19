@@ -34,6 +34,8 @@ export default function FirebaseFirestoreDemo() {
     await getDoc(docRef).then((doc) => {
       if (doc?.data()) {
         const timestamp = doc?.data()?.timestamp;
+        console.log("🚀 ~ awaitgetDoc ~ timestamp:", timestamp.toDate());
+
         const serverTimestamp = !!timestamp
           ? new Date(timestamp?.seconds * 1000).toISOString()
           : "";
