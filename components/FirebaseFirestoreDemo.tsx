@@ -33,9 +33,10 @@ export default function FirebaseFirestoreDemo() {
     await setDoc(docRef, { timestamp: firebaseServerTimestamp() });
     await getDoc(docRef).then((doc) => {
       if (doc?.data()) {
-        const serverTimestamp = new Date(
-          doc?.data()?.timestamp?.seconds * 1000
-        ).toISOString();
+        const timestamp = doc?.data()?.timestamp;
+        const serverTimestamp = !!timestamp
+          ? new Date(timestamp?.seconds * 1000).toISOString()
+          : "";
         AsyncStorage.setItem(
           `storedTimestampFs_${user.email}`,
           serverTimestamp
